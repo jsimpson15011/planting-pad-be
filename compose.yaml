@@ -1,0 +1,17 @@
+﻿services:
+  plantingpadbe:
+    image: plantingpadbe
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    command: [ "dotnet","ef","database","update" ]
+  db:      
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: always
+    ports:
+      - "1533:1433"
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${SA_PASSWORD}
