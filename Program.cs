@@ -33,6 +33,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<CustomIdentity>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 
 
@@ -41,6 +43,15 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 
 app.MapIdentityApi<CustomIdentity>();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1");
+    });
+}
 
 app.UseHttpsRedirection();
 

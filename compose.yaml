@@ -9,11 +9,22 @@
     depends_on:
       - db
     command: [ "dotnet","ef","database","update" ]
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+    networks:
+      - plantingpad_network
   db:      
     image: mcr.microsoft.com/mssql/server:2022-latest
     restart: always
+    container_name: sqlserver
     ports:
       - "1533:1433"
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: ${SA_PASSWORD}
+    networks:
+      - plantingpad_network
+
+networks:
+  plantingpad_network:
+        
