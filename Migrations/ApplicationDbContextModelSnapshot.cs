@@ -237,10 +237,16 @@ namespace plantingPadBE.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -317,6 +323,34 @@ namespace plantingPadBE.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("plantingPadBE.Models.PlantingPadVersion", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("PlantingPadId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("SerializedData")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VersionNumber")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlantingPadId");
+
+                    b.ToTable("PlantingPadVersion");
                 });
 
             modelBuilder.Entity("plantingPadBE.Models.Plant", b =>
@@ -454,9 +488,22 @@ namespace plantingPadBE.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("plantingPadBE.Models.PlantingPadVersion", b =>
+                {
+                    b.HasOne("plantingPadBE.Models.PlantingPad", "PlantingPad")
+                        .WithMany("Versions")
+                        .HasForeignKey("PlantingPadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PlantingPad");
+                });
+
             modelBuilder.Entity("plantingPadBE.Models.PlantingPad", b =>
                 {
                     b.Navigation("CanvasItems");
+
+                    b.Navigation("Versions");
                 });
 #pragma warning restore 612, 618
         }

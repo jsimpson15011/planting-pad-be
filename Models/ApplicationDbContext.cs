@@ -22,11 +22,17 @@ public class ApplicationDbContext : IdentityDbContext<PlantingPadIdentity>
             .HasDiscriminator<string>("ItemType") // Add Discriminator Column
             .HasValue<CatalogItem>("CatalogItem")     // Default value for base class
             .HasValue<Plant>("Plant");               // Value for derived class
-
-        // Optional: Configure column constraints
+        
         modelBuilder.Entity<CatalogItem>()
             .Property("ItemType")
             .HasMaxLength(50);
+        
+        modelBuilder.Entity<PlantingPadVersion>()
+            .HasOne(v => v.PlantingPad)
+            .WithMany(p => p.Versions)
+            .HasForeignKey(v => v.PlantingPadId)
+            .OnDelete(DeleteBehavior.Cascade);
+
     }
 
 }

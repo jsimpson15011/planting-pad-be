@@ -20,7 +20,6 @@ sqlBuilder.InitialCatalog = dbDatabase;
 sqlBuilder.Password = sqlPassword;
 if (builder.Environment.IsDevelopment())
 {
-    Console.WriteLine(sqlBuilder.ToString());
   sqlBuilder.TrustServerCertificate = true;
 }
 
