@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using plantingPadBE.Models;
 
@@ -11,9 +12,11 @@ using plantingPadBE.Models;
 namespace plantingPadBE.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250302033737_Add_Basic_Models")]
+    partial class Add_Basic_Models
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -178,9 +181,6 @@ namespace plantingPadBE.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<Guid?>("PlantingPadId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<float>("Width")
                         .HasColumnType("real");
 
@@ -191,8 +191,6 @@ namespace plantingPadBE.Migrations
                         .HasColumnType("real");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PlantingPadId");
 
                     b.ToTable("CanvasItems");
                 });
@@ -229,29 +227,6 @@ namespace plantingPadBE.Migrations
                     b.HasDiscriminator<string>("ItemType").HasValue("CatalogItem");
 
                     b.UseTphMappingStrategy();
-                });
-
-            modelBuilder.Entity("plantingPadBE.Models.PlantingPad", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("PlantingPads");
                 });
 
             modelBuilder.Entity("plantingPadBE.Models.PlantingPadIdentity", b =>
@@ -434,29 +409,6 @@ namespace plantingPadBE.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("plantingPadBE.Models.CanvasItem", b =>
-                {
-                    b.HasOne("plantingPadBE.Models.PlantingPad", null)
-                        .WithMany("CanvasItems")
-                        .HasForeignKey("PlantingPadId");
-                });
-
-            modelBuilder.Entity("plantingPadBE.Models.PlantingPad", b =>
-                {
-                    b.HasOne("plantingPadBE.Models.PlantingPadIdentity", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("plantingPadBE.Models.PlantingPad", b =>
-                {
-                    b.Navigation("CanvasItems");
                 });
 #pragma warning restore 612, 618
         }

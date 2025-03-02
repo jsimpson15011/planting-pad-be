@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using plantingPadBE.Models;
@@ -21,6 +20,7 @@ sqlBuilder.InitialCatalog = dbDatabase;
 sqlBuilder.Password = sqlPassword;
 if (builder.Environment.IsDevelopment())
 {
+    Console.WriteLine(sqlBuilder.ToString());
   sqlBuilder.TrustServerCertificate = true;
 }
 
@@ -32,7 +32,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
-builder.Services.AddIdentityApiEndpoints<CustomIdentity>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentityApiEndpoints<PlantingPadIdentity>().AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -42,7 +42,7 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-app.MapIdentityApi<CustomIdentity>();
+app.MapIdentityApi<PlantingPadIdentity>();
 
 if (app.Environment.IsDevelopment())
 {

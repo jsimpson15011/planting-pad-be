@@ -8,7 +8,6 @@
       dockerfile: Dockerfile
     depends_on:
       - db
-    command: [ "dotnet","ef","database","update" ]
     environment:
       ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
     networks:
