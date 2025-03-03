@@ -178,7 +178,7 @@ namespace plantingPadBE.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<Guid?>("PlantingPadId")
+                    b.Property<Guid>("PlantingPadId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<float>("Width")
@@ -474,7 +474,9 @@ namespace plantingPadBE.Migrations
                 {
                     b.HasOne("plantingPadBE.Models.PlantingPad", null)
                         .WithMany("CanvasItems")
-                        .HasForeignKey("PlantingPadId");
+                        .HasForeignKey("PlantingPadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("plantingPadBE.Models.PlantingPad", b =>
