@@ -20,4 +20,5 @@ public class CanvasItem
     public float BufferWidth { get; set; }
 
     [ForeignKey("CatalogItemId")] public Guid CatalogItemId { get; set; }
+    [ForeignKey("PlantingPadId")] public Guid PlantingPadId { get; set; }
 }

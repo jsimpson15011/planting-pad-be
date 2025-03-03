@@ -32,7 +32,13 @@ public class ApplicationDbContext : IdentityDbContext<PlantingPadIdentity>
             .WithMany(p => p.Versions)
             .HasForeignKey(v => v.PlantingPadId)
             .OnDelete(DeleteBehavior.Cascade);
-
+        
+        modelBuilder.Entity<CanvasItem>()
+            .HasOne<PlantingPad>()
+            .WithMany(p => p.CanvasItems)
+            .HasForeignKey(c => c.PlantingPadId)
+            .OnDelete(DeleteBehavior.Cascade);
+        
     }
 
 }
