@@ -1,6 +1,7 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using plantingPadBE.Models;
+using plantingPadBE.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,7 +35,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<PlantingPadIdentity>().AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddScoped<IPlantingPadService, PlantingPadService>();
 
 
 var app = builder.Build();

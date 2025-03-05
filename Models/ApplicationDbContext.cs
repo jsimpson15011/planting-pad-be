@@ -7,7 +7,7 @@ public class ApplicationDbContext : IdentityDbContext<PlantingPadIdentity>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options){}
     
-    public DbSet<PlantingPad> PlantingPads { get; set; }
+    public DbSet<PlantingPad?> PlantingPads { get; set; }
     
     public DbSet<CanvasItem> CanvasItems { get; set; }
     
