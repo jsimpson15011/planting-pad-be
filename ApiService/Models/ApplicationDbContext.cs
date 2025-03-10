@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using ApiService.Models;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace ApiService.Models;
 
-public class ApplicationDbContext : IdentityDbContext<PlantingPadIdentity>
+public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options){}
     

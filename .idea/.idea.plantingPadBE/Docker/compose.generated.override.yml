@@ -35,5 +35,6 @@ services:
     volumes:
     - "C:\\projects\\plantingpad\\be\\plantingPadBE\\AuthService:/app:rw"
     - "C:\\projects\\plantingpad\\be\\plantingPadBE:/src:rw"
+    - "C:\\Users\\Good Computer\\AppData\\Roaming\\Microsoft\\UserSecrets:/home/app/.microsoft/usersecrets"
     - "C:\\Users\\Good Computer\\.nuget\\packages:/home/app/.nuget/packages"
     working_dir: "/app"

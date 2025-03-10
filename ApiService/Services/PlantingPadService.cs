@@ -28,7 +28,6 @@ public class PlantingPadService : IPlantingPadService
         PlantingPad plantingPad = new PlantingPad
         {
             UserId = null!,
-            User = null!,
             Name = plantingPadDto.Name,
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow,

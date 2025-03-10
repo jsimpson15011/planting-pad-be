@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace ApiService.Models;
+namespace AuthService.Models;
 
 public class PlantingPadIdentity : IdentityUser
 {

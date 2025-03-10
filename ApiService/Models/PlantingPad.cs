@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using AuthService.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiService.Models;
@@ -17,11 +18,7 @@ public class PlantingPad
     [Required]
     [MaxLength(450)]
     public required string UserId { get; set; }
-
-    // Navigation property to the Identity User
-    public required PlantingPadIdentity User { get; set; }
-
-
+    
     public DbSet<CanvasItem>? CanvasItems { get; set; }
     
     public DateTime CreatedAt { get; set; }
