@@ -1,0 +1,39 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  apiservice:
+    build:
+      context: "C:\\projects\\plantingpad\\be\\plantingPadBE\\ApiService"
+      dockerfile: "Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net9.0/ApiService.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "apiservice:dev"
+    ports: []
+    volumes:
+    - "C:\\projects\\plantingpad\\be\\plantingPadBE\\ApiService:/app:rw"
+    - "C:\\projects\\plantingpad\\be\\plantingPadBE:/src:rw"
+    - "C:\\Users\\Good Computer\\AppData\\Roaming\\Microsoft\\UserSecrets:/home/app/.microsoft/usersecrets"
+    - "C:\\Users\\Good Computer\\.nuget\\packages:/home/app/.nuget/packages"
+    working_dir: "/app"
+  authservice:
+    build:
+      context: "C:\\projects\\plantingpad\\be\\plantingPadBE\\AuthService"
+      dockerfile: "Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net9.0/AuthService.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "authservice:dev"
+    ports: []
+    volumes:
+    - "C:\\projects\\plantingpad\\be\\plantingPadBE\\AuthService:/app:rw"
+    - "C:\\projects\\plantingpad\\be\\plantingPadBE:/src:rw"
+    - "C:\\Users\\Good Computer\\.nuget\\packages:/home/app/.nuget/packages"
+    working_dir: "/app"

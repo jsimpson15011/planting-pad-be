@@ -1,13 +1,24 @@
 ﻿services:
-  plantingpadbe:
-    image: plantingpadbe
+  apiservice:
+    image: apiservice
     ports:
       - "5044:8080"
     build:
-      context: .
+      context: ApiService
       dockerfile: Dockerfile
     depends_on:
       - db
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+    networks:
+      - plantingpad_network
+  authservice:
+    image: authservice
+    ports:
+      - "5045:8080"
+    build:
+      context: AuthService
+      dockerfile: Dockerfile
     environment:
       ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
     networks:
@@ -23,7 +34,12 @@
       MSSQL_SA_PASSWORD: ${SA_PASSWORD}
     networks:
       - plantingpad_network
+    volumes:
+      - dbdata:/var/opt/mssql
 
 networks:
   plantingpad_network:
+    
+volumes:
+  dbdata:
         
